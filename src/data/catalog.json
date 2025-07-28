@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "id": "nova-button",
+      "name": "Button",
+      "tags": ["button", "action", "click"],
+      "synonyms": ["btn", "submit", "cta"],
+      "a11yNotes": ["Ensure descriptive text", "Keyboard accessible"],
+      "snippetTemplate": "button-basic"
+    },
+    {
+      "id": "nova-input",
+      "name": "Input",
+      "tags": ["form", "input", "text", "field"],
+      "synonyms": ["textbox", "text field", "form field"],
+      "a11yNotes": ["Label required", "Error messages must be associated"],
+      "snippetTemplate": "input-basic"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "login-form",
+      "name": "Login Form",
+      "tags": ["authentication", "login", "form", "pattern"],
+      "synonyms": ["sign in", "log in", "signin"],
+      "components": ["nova-input", "nova-button"],
+      "a11yNotes": ["Form landmark", "Error summary", "Submit on Enter"],
+      "snippetTemplate": "login-responsive"
+    }
+  ]
+}
