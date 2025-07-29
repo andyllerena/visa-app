@@ -1,31 +1,640 @@
 {
   "components": [
     {
+      "id": "nova-accordion",
+      "name": "Accordion",
+      "description": "Vertically stacked content sections that expand or collapse to show or hide related content. Useful for progressive disclosure and minimizing page scroll.",
+      "tags": [
+        "accordion",
+        "expand",
+        "collapse",
+        "toggle",
+        "panel",
+        "content",
+        "progressive disclosure"
+      ],
+      "synonyms": [
+        "expand/collapse",
+        "hide/show",
+        "summary",
+        "details",
+        "disclosure"
+      ],
+      "category": "display",
+      "codeExample": "accordion-default",
+      "a11yNotes": [
+        "Use proper heading hierarchy",
+        "Announce expanded/collapsed state",
+        "Keyboard navigable with arrow keys",
+        "Focus visible on active section"
+      ]
+    },
+    {
+      "id": "nova-banner",
+      "name": "Banner",
+      "description": "Provides global or system-level messages to inform users about the status of an application or site. Banners range from low to critical importance and may include dismiss and follow-up actions.",
+      "tags": [
+        "banner",
+        "status",
+        "message",
+        "notification",
+        "update",
+        "info",
+        "alert",
+        "system"
+      ],
+      "synonyms": [
+        "status alert",
+        "informational notice",
+        "global status message",
+        "site notice",
+        "system message"
+      ],
+      "category": "feedback",
+      "codeExample": "banner-default",
+      "a11yNotes": [
+        "Use role='alert' for important messages",
+        "Dismissible banners need keyboard access",
+        "Announce to screen readers when appearing",
+        "Include aria-live region for updates"
+      ]
+    },
+    {
+      "id": "nova-breadcrumbs",
+      "name": "Breadcrumbs",
+      "description": "A supplemental navigation element that shows users their current location within a site or app and allows quick navigation across multiple layers of hierarchy.",
+      "tags": [
+        "breadcrumbs",
+        "navigation",
+        "location",
+        "path",
+        "wayfinding",
+        "links",
+        "pages",
+        "folders"
+      ],
+      "synonyms": [
+        "breadcrumb trail",
+        "cookie crumb trail",
+        "navigation trail",
+        "site hierarchy"
+      ],
+      "category": "navigation",
+      "codeExample": "breadcrumbs-default",
+      "a11yNotes": [
+        "Use nav element with aria-label",
+        "Current page should have aria-current='page'",
+        "Separate items with aria-hidden separators",
+        "Maintain logical tab order"
+      ]
+    },
+    {
       "id": "nova-button",
       "name": "Button",
-      "tags": ["button", "action", "click"],
-      "synonyms": ["btn", "submit", "cta"],
-      "a11yNotes": ["Ensure descriptive text", "Keyboard accessible"],
-      "snippetTemplate": "button-basic"
+      "description": "A clickable element used to trigger actions. Buttons typically contain text, icons, or both and are used in dialogs, forms, and content sections to communicate a clear call to action.",
+      "tags": [
+        "button",
+        "action",
+        "cta",
+        "click",
+        "form",
+        "submit",
+        "interactive",
+        "trigger"
+      ],
+      "synonyms": [
+        "push button",
+        "action menu",
+        "actions drop-down",
+        "elevated button",
+        "UI button"
+      ],
+      "category": "form",
+      "codeExample": "button-default",
+      "a11yNotes": [
+        "Use descriptive text labels",
+        "Focus visible state required",
+        "Disabled state must be announced",
+        "Icon-only buttons need aria-label"
+      ]
+    },
+    {
+      "id": "nova-checkbox",
+      "name": "Checkbox",
+      "description": "An interactive input element that allows users to select one or more options from a list. Commonly used in forms, filters, and settings where multiple selections are allowed.",
+      "tags": [
+        "checkbox",
+        "form",
+        "option",
+        "select",
+        "multiple",
+        "tick",
+        "input",
+        "filter"
+      ],
+      "synonyms": ["check box", "tick box", "checkBox", "checkbox group"],
+      "category": "form",
+      "codeExample": "checkbox-default",
+      "a11yNotes": [
+        "Label must be clickable",
+        "Group related checkboxes with fieldset",
+        "Announce checked/unchecked state",
+        "Space/Enter to toggle"
+      ]
+    },
+    {
+      "id": "nova-selection-chip",
+      "name": "Selection Chip",
+      "description": "Compact, interactive UI elements that represent options or filters. Selection chips allow users to make choices from a set of options, often used in filter groups, tag selectors, or multi-select UIs.",
+      "tags": [
+        "chip",
+        "selection",
+        "filter",
+        "option",
+        "tag",
+        "pill",
+        "lozenge",
+        "toggle",
+        "checkbox"
+      ],
+      "synonyms": [
+        "pill",
+        "tag",
+        "lozenge",
+        "selectable tag",
+        "dismissible tag",
+        "selection chip"
+      ],
+      "category": "form",
+      "codeExample": "selection-chip-default",
+      "a11yNotes": [
+        "Use role='checkbox' for selection",
+        "Announce selected state",
+        "Keyboard navigable with arrow keys",
+        "Delete key removes if dismissible"
+      ]
+    },
+    {
+      "id": "nova-combobox",
+      "name": "Combobox",
+      "description": "A hybrid input that combines a text field and a dropdown list, allowing users to either select from a list of predefined options or input custom text. Commonly used for filtering, search, or selection tasks.",
+      "tags": [
+        "combobox",
+        "dropdown",
+        "input",
+        "select",
+        "autocomplete",
+        "filter",
+        "form",
+        "menu",
+        "picker"
+      ],
+      "synonyms": [
+        "combo box",
+        "autocomplete",
+        "autosuggest",
+        "spinner",
+        "UIPickerView",
+        "menu",
+        "menu item"
+      ],
+      "category": "form",
+      "codeExample": "combobox-default",
+      "a11yNotes": [
+        "Announce number of results",
+        "Arrow keys navigate options",
+        "Escape closes dropdown",
+        "Selected option fills input"
+      ]
+    },
+    {
+      "id": "nova-content-card",
+      "name": "Content Card",
+      "description": "A customizable container that groups related content, icons, and actions. Often used to preview or summarize a topic, encourage user engagement, and support click-through to more detailed content.",
+      "tags": [
+        "card",
+        "content",
+        "tile",
+        "preview",
+        "container",
+        "summary",
+        "component",
+        "spotlight"
+      ],
+      "synonyms": ["tile", "snapshot", "card", "spotlight", "content preview"],
+      "category": "display",
+      "codeExample": "content-card-default",
+      "a11yNotes": [
+        "Use article or section element",
+        "Heading hierarchy must be logical",
+        "Interactive cards need focus states",
+        "Alt text for card images"
+      ]
+    },
+    {
+      "id": "nova-date-selector",
+      "name": "Date Selector",
+      "description": "A calendar-based input component that allows users to select or enter a specific date. Often used in forms to collect date-based input while saving space and providing a clear, localized experience.",
+      "tags": [
+        "date",
+        "calendar",
+        "input",
+        "form",
+        "datepicker",
+        "schedule",
+        "time",
+        "field",
+        "selection"
+      ],
+      "synonyms": [
+        "date picker",
+        "time picker",
+        "calendar selector",
+        "calendar picker",
+        "date input",
+        "time input"
+      ],
+      "category": "form",
+      "codeExample": "date-selector-default",
+      "a11yNotes": [
+        "Keyboard navigation for calendar",
+        "Announce selected date",
+        "Format instructions in label",
+        "Manual input option required"
+      ]
+    },
+    {
+      "id": "nova-dialog",
+      "name": "Dialog",
+      "description": "A modal container that interrupts the user's workflow to present time-sensitive information, confirm actions, or prompt for quick decisions. Dialogs are used to communicate alerts, statuses, or immediate options and are layered over the current page with an overlay.",
+      "tags": [
+        "dialog",
+        "modal",
+        "popup",
+        "overlay",
+        "alert",
+        "confirmation",
+        "message",
+        "container"
+      ],
+      "synonyms": [
+        "modal",
+        "lightbox",
+        "popup module",
+        "dialog box",
+        "overlay",
+        "alert",
+        "alert dialog",
+        "feedback dialog"
+      ],
+      "category": "overlay",
+      "codeExample": "dialog-default",
+      "a11yNotes": [
+        "Focus trapped within dialog",
+        "Escape key closes dialog",
+        "Focus returns to trigger on close",
+        "Background content aria-hidden"
+      ]
+    },
+    {
+      "id": "nova-dropdown-menu",
+      "name": "Dropdown Menu",
+      "description": "A compact, toggleable list of actions or options triggered by a button. Dropdown menus are often used to conserve space by grouping related commands or providing actions within constrained layouts like tables.",
+      "tags": [
+        "dropdown",
+        "menu",
+        "actions",
+        "select",
+        "options",
+        "button",
+        "list",
+        "toggle"
+      ],
+      "synonyms": [
+        "menu",
+        "select menu",
+        "command menu dropdown",
+        "actions drop-down",
+        "action menu",
+        "picker",
+        "menu item"
+      ],
+      "category": "navigation",
+      "codeExample": "dropdown-menu-default",
+      "a11yNotes": [
+        "Arrow keys navigate menu items",
+        "Escape closes menu",
+        "First item auto-focused on open",
+        "Role='menu' with menuitems"
+      ]
+    },
+    {
+      "id": "nova-footer",
+      "name": "Footer",
+      "description": "A persistent section placed at the bottom of a page that typically includes branding, legal disclaimers, and navigation links. Footers help provide key context, attribution, and site-wide resources, especially in web applications.",
+      "tags": [
+        "footer",
+        "bottom",
+        "legal",
+        "links",
+        "branding",
+        "copyright",
+        "navigation",
+        "section"
+      ],
+      "synonyms": [
+        "bottom section",
+        "end section",
+        "UITabBar",
+        "BottomNavigationView",
+        "page footer"
+      ],
+      "category": "layout",
+      "codeExample": "footer-default",
+      "a11yNotes": [
+        "Use footer landmark role",
+        "Group links with nav elements",
+        "Ensure sufficient color contrast",
+        "Skip link to footer if long page"
+      ]
+    },
+    {
+      "id": "nova-horizontal-nav",
+      "name": "Horizontal Navigation",
+      "description": "A top-level navigation bar that allows users to move between major sections of an application or site. Typically placed at the top of the screen, it may include branding, navigation links, dropdowns, global search, notifications, and user profile actions.",
+      "tags": [
+        "navigation",
+        "top nav",
+        "horizontal menu",
+        "header",
+        "navbar",
+        "tabs",
+        "menu",
+        "global"
+      ],
+      "synonyms": [
+        "horizontal menu",
+        "top navigation bar",
+        "horizontal tab navigation",
+        "UITabBarController",
+        "TabLayout",
+        "row navigation",
+        "navbar"
+      ],
+      "category": "navigation",
+      "codeExample": "horizontal-nav-default",
+      "a11yNotes": [
+        "Use nav landmark",
+        "Current page marked with aria-current",
+        "Skip navigation link first item",
+        "Responsive menu keyboard accessible"
+      ]
     },
     {
       "id": "nova-input",
       "name": "Input",
-      "tags": ["form", "input", "text", "field"],
-      "synonyms": ["textbox", "text field", "form field"],
-      "a11yNotes": ["Label required", "Error messages must be associated"],
-      "snippetTemplate": "input-basic"
+      "description": "A single-line text field used to collect user input. Inputs are commonly used in forms, search bars, and interactive flows where users need to enter data or free-form text.",
+      "tags": [
+        "input",
+        "text",
+        "form",
+        "text field",
+        "field",
+        "entry",
+        "textbox",
+        "data"
+      ],
+      "synonyms": [
+        "text field",
+        "input field",
+        "text input",
+        "text box",
+        "form field",
+        "UITextField",
+        "EditText"
+      ],
+      "category": "form",
+      "codeExample": "input-default",
+      "a11yNotes": [
+        "Label required and associated",
+        "Error messages linked with aria-describedby",
+        "Required fields marked with aria-required",
+        "Input type matches expected data"
+      ]
+    },
+    {
+      "id": "nova-listbox-single-select",
+      "name": "Single-Select Listbox",
+      "description": "A vertically structured menu that allows users to select a single item from a list. Commonly used in forms and menus, single-select listboxes are foundational UI components used in dropdowns, comboboxes, and navigation patterns.",
+      "tags": [
+        "listbox",
+        "single-select",
+        "list",
+        "menu",
+        "dropdown",
+        "selection",
+        "option",
+        "form"
+      ],
+      "synonyms": [
+        "list",
+        "menu",
+        "dropdown",
+        "UIPickerView",
+        "Spinner",
+        "MenuItem",
+        "select menu"
+      ],
+      "category": "form",
+      "codeExample": "listbox-single-select-default",
+      "a11yNotes": [
+        "Arrow keys navigate options",
+        "Selected option has aria-selected",
+        "Type to search/filter options",
+        "Enter or Space selects option"
+      ]
+    },
+    {
+      "id": "nova-pagination",
+      "name": "Pagination",
+      "description": "A navigation component that divides content into multiple pages. It includes controls to move forward, backward, or jump to specific pages, helping users efficiently navigate large data sets or content collections.",
+      "tags": [
+        "pagination",
+        "pages",
+        "navigation",
+        "page numbers",
+        "paging",
+        "multi-page",
+        "list navigation",
+        "arrow buttons"
+      ],
+      "synonyms": [
+        "page navigation",
+        "page toggle",
+        "page numbers",
+        "paging",
+        "pagination control"
+      ],
+      "category": "navigation",
+      "codeExample": "pagination-default",
+      "a11yNotes": [
+        "Current page announced",
+        "Total pages communicated",
+        "Disabled states for first/last",
+        "Keyboard navigation between pages"
+      ]
+    },
+    {
+      "id": "nova-panel",
+      "name": "Panel",
+      "description": "A modal or persistent section used to display supplementary content, often overlaid on the main interface. Panels are commonly used for help content, side actions, or detailed views and can include interactive elements such as buttons and links.",
+      "tags": [
+        "panel",
+        "modal",
+        "drawer",
+        "tray",
+        "overlay",
+        "flyout",
+        "sheet",
+        "dialog",
+        "side panel"
+      ],
+      "synonyms": [
+        "side sheet",
+        "bottom sheet",
+        "drawer",
+        "tray",
+        "flyout",
+        "side panel",
+        "modal"
+      ],
+      "category": "layout",
+      "codeExample": "modal-panel-default",
+      "a11yNotes": [
+        "Focus management when open",
+        "Escape key closes panel",
+        "Announce panel opening",
+        "Background content interaction blocked"
+      ]
+    },
+    {
+      "id": "nova-radio",
+      "name": "Radio Button",
+      "description": "A form control that allows users to select exactly one option from a group. Used when options are mutually exclusive.",
+      "tags": [
+        "radio",
+        "form",
+        "single-select",
+        "option",
+        "choice",
+        "button",
+        "input"
+      ],
+      "synonyms": ["radio button", "option button", "single choice"],
+      "category": "form",
+      "codeExample": "radio-default",
+      "a11yNotes": [
+        "Group with fieldset and legend",
+        "Arrow keys navigate within group",
+        "Only one selectable per group",
+        "Label clickable to select"
+      ]
+    },
+    {
+      "id": "nova-select",
+      "name": "Select",
+      "description": "A form input that allows users to choose a single option from a dropdown menu. Select components are commonly used in forms to save space while providing a clear and efficient selection process.",
+      "tags": [
+        "select",
+        "dropdown",
+        "menu",
+        "form",
+        "input",
+        "single-select",
+        "option",
+        "list"
+      ],
+      "synonyms": [
+        "select menu",
+        "select input",
+        "dropdown",
+        "menu",
+        "UIPickerView",
+        "Spinner",
+        "MenuItem"
+      ],
+      "category": "form",
+      "codeExample": "select-default",
+      "a11yNotes": [
+        "Label associated with select",
+        "First option descriptive if placeholder",
+        "Keyboard navigation with arrows",
+        "Announces selected option"
+      ]
+    },
+    {
+      "id": "nova-switch",
+      "name": "Switch",
+      "description": "A binary toggle control that allows users to turn an option on or off. Commonly used in settings, preferences, and account configurations to quickly enable or disable a feature.",
+      "tags": [
+        "switch",
+        "toggle",
+        "on/off",
+        "form",
+        "input",
+        "control",
+        "settings"
+      ],
+      "synonyms": [
+        "toggle switch",
+        "flip switch",
+        "light switch",
+        "binary switch",
+        "UISwitch",
+        "Android Switch"
+      ],
+      "category": "form",
+      "codeExample": "default-switch",
+      "a11yNotes": [
+        "Label describes what switch controls",
+        "Announce on/off state",
+        "Space or Enter toggles",
+        "Visual state clear without color"
+      ]
+    },
+    {
+      "id": "nova-table",
+      "name": "Table",
+      "description": "A structured layout used to organize and display information in rows and columns. Tables are commonly used for presenting data sets, summaries, or comparisons in a static, read-only format.",
+      "tags": [
+        "table",
+        "data",
+        "static",
+        "read-only",
+        "rows",
+        "columns",
+        "banded",
+        "grid",
+        "display"
+      ],
+      "synonyms": [
+        "fixed table",
+        "non-dynamic table",
+        "read-only table",
+        "non-editable table",
+        "constant table",
+        "static table"
+      ],
+      "category": "display",
+      "codeExample": "large-padding-banded-table",
+      "a11yNotes": [
+        "Use table headers with scope",
+        "Caption describes table content",
+        "Ensure responsive on mobile",
+        "Row/column headers for complex tables"
+      ]
     }
   ],
-  "patterns": [
-    {
-      "id": "login-form",
-      "name": "Login Form",
-      "tags": ["authentication", "login", "form", "pattern"],
-      "synonyms": ["sign in", "log in", "signin"],
-      "components": ["nova-input", "nova-button"],
-      "a11yNotes": ["Form landmark", "Error summary", "Submit on Enter"],
-      "snippetTemplate": "login-responsive"
-    }
-  ]
+
+  "patterns": []
 }
