@@ -1,103 +1,104 @@
-import Image from "next/image";
+// src/app/page.tsx
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { OnboardingModal } from "@/components/onboarding/OnboardingModal";
+import { PromptBox } from "@/components/search/PromptBox";
+import { SkeletonLoader } from "@/components/common/SkeletonLoader";
+import { ResultCard } from "@/components/search/ResultCard";
+import { scoreResults, ScoredResult } from "@/lib/scorer";
+import { Component, Pattern } from "@/types";
+
+export default function HomePage() {
+  const [isSearching, setIsSearching] = useState(false);
+  const [results, setResults] = useState<ScoredResult[]>([]);
+  const [selectedResult, setSelectedResult] = useState<ScoredResult | null>(
+    null
+  );
+
+  const handleSearch = async (query: string) => {
+    setIsSearching(true);
+    setSelectedResult(null);
+
+    try {
+      const [componentsRes, patternsRes] = await Promise.all([
+        fetch("/api/components"),
+        fetch("/api/patterns"),
+      ]);
+
+      const components: Component[] = await componentsRes.json();
+      const patterns: Pattern[] = await patternsRes.json();
+
+      // Score and rank results
+      const scoredResults = scoreResults(query, components, patterns);
+      setResults(scoredResults);
+
+      // Auto-select first result if any
+      if (scoredResults.length > 0) {
+        setSelectedResult(scoredResults[0]);
+      }
+    } catch (error) {
+      console.error("Search failed:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <OnboardingModal />
+      <main className="min-h-screen bg-[#F9FAFB] py-12">
+        <div className="max-w-4xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold mb-4 text-gray-900">
+              VPDS Component Suggester
+            </h1>
+            <p className="text-xl text-gray-600">
+              Describe what you want to build, get Nova components instantly
+            </p>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Search Box */}
+          <div className="mb-8">
+            <PromptBox onSearch={handleSearch} isLoading={isSearching} />
+          </div>
+
+          {/* Results */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Results List */}
+            <div>
+              {isSearching ? (
+                <SkeletonLoader />
+              ) : results.length > 0 ? (
+                <div className="space-y-3">
+                  <h2 className="text-lg font-semibold text-gray-900 mb-3">
+                    Found {results.length} matches
+                  </h2>
+                  {results.map((result, index) => (
+                    <ResultCard
+                      key={`${result.type}-${result.item.id}`}
+                      result={result}
+                      onClick={() => setSelectedResult(result)}
+                      isActive={selectedResult?.item.id === result.item.id}
+                    />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+
+            {/* Code Preview (placeholder for now) */}
+            {selectedResult && (
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <h3 className="font-semibold mb-4">Code Preview</h3>
+                <pre className="text-sm bg-gray-50 p-4 rounded overflow-x-auto">
+                  {JSON.stringify(selectedResult, null, 2)}
+                </pre>
+              </div>
+            )}
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
