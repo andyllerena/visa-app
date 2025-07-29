@@ -5,9 +5,11 @@ import { useState } from "react";
 import { OnboardingModal } from "@/components/onboarding/OnboardingModal";
 import { PromptBox } from "@/components/search/PromptBox";
 import { SkeletonLoader } from "@/components/common/SkeletonLoader";
-import { ResultCard } from "@/components/search/ResultCard";
 import { scoreResults, ScoredResult } from "@/lib/scorer";
 import { Component, Pattern } from "@/types";
+import { Modal } from "@/components/common/Modal";
+import { SnippetPanelModal } from "@/components/snippet/SnippetPanelModal";
+import { ResultCardGrid } from "@/components/search/ResultCardGrid";
 
 export default function HomePage() {
   const [isSearching, setIsSearching] = useState(false);
@@ -15,6 +17,7 @@ export default function HomePage() {
   const [selectedResult, setSelectedResult] = useState<ScoredResult | null>(
     null
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = async (query: string) => {
     setIsSearching(true);
@@ -30,13 +33,8 @@ export default function HomePage() {
       const patterns: Pattern[] = await patternsRes.json();
 
       // Score and rank results
-      const scoredResults = scoreResults(query, components, patterns);
+      const scoredResults = scoreResults(query, components);
       setResults(scoredResults);
-
-      // Auto-select first result if any
-      if (scoredResults.length > 0) {
-        setSelectedResult(scoredResults[0]);
-      }
     } catch (error) {
       console.error("Search failed:", error);
     } finally {
@@ -44,11 +42,21 @@ export default function HomePage() {
     }
   };
 
+  const handleResultClick = (result: ScoredResult) => {
+    setSelectedResult(result);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedResult(null), 300);
+  };
+
   return (
     <>
       <OnboardingModal />
       <main className="min-h-screen bg-[#F9FAFB] py-12">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-8">
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 text-gray-900">
@@ -60,45 +68,59 @@ export default function HomePage() {
           </div>
 
           {/* Search Box */}
-          <div className="mb-8">
+          <div className="max-w-3xl mx-auto mb-12">
             <PromptBox onSearch={handleSearch} isLoading={isSearching} />
           </div>
 
-          {/* Results */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Results List */}
-            <div>
-              {isSearching ? (
-                <SkeletonLoader />
-              ) : results.length > 0 ? (
-                <div className="space-y-3">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">
-                    Found {results.length} matches
-                  </h2>
-                  {results.map((result, index) => (
-                    <ResultCard
-                      key={`${result.type}-${result.item.id}`}
-                      result={result}
-                      onClick={() => setSelectedResult(result)}
-                      isActive={selectedResult?.item.id === result.item.id}
+          {isSearching ? (
+            <SkeletonLoader />
+          ) : results.length > 0 ? (
+            <>
+              <div className="mb-6 flex justify-between items-center">
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Top {results.length} Matches
+                </h2>
+                <button
+                  onClick={() => console.log("Generate pattern")} // Wire up later
+                  className="px-4 py-2 bg-[#1434CB] text-white rounded-lg hover:bg-[#021E4C] transition-colors flex items-center gap-2"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
                     />
-                  ))}
-                </div>
-              ) : null}
-            </div>
-
-            {/* Code Preview (placeholder for now) */}
-            {selectedResult && (
-              <div className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold mb-4">Code Preview</h3>
-                <pre className="text-sm bg-gray-50 p-4 rounded overflow-x-auto">
-                  {JSON.stringify(selectedResult, null, 2)}
-                </pre>
+                  </svg>
+                  Generate Pattern
+                </button>
               </div>
-            )}
-          </div>
+
+              <div className="grid grid-cols-3 gap-6">
+                {results.map((result) => (
+                  <ResultCardGrid
+                    key={`${result.item.id}`}
+                    result={result}
+                    onClick={() => handleResultClick(result)}
+                  />
+                ))}
+              </div>
+            </>
+          ) : null}
         </div>
       </main>
+
+      {/* Code Modal */}
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {selectedResult && (
+          <SnippetPanelModal result={selectedResult} onClose={closeModal} />
+        )}
+      </Modal>
     </>
   );
 }

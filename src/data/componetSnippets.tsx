@@ -608,4 +608,13 @@ return (
   </Tbody>
 </Table>`,
   },
+  "input-default": {
+    imports: ["Input", "InputContainer", "Label", "Utility"],
+    code: `<Utility vFlex vFlexCol vGap={4}>
+  <Label htmlFor="input-default">Label (required)</Label>
+  <InputContainer>
+    <Input aria-required="true" id="input-default" type="text" />
+  </InputContainer>
+</Utility>`,
+  },
 };
