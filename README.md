@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gen VISA : prompt driven UI generator that speaks VPDS
 
-## Getting Started
+Describe what you need, get the best Visa Product Design System components, copy a ready snippet.
 
-First, run the development server:
+## Approach and tech choices
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js App Router and React 18 for rapid routing and Vercel zero config deploy
+- Tailwind CSS for layout and focus rings, separate from the VPDS look
+- Local JSON catalog of more than twenty Nova components, each with tags, synonyms, accessibility notes, and a snippet id
+- TypeScript rule based scorer that adds points for exact name, tag, or synonym and returns the top nine matches
+- json‑server mock API with a half‑second delay plus skeleton loaders so the app feels like it is calling a backend
+- Real snippets import `@visa/nova‑react` primitives so output is always on brand
+
+## Scoring in one glance
+
+```
+exact name   +20
+tag match     +5 per tag
+synonym       +3 per synonym
+sort high to low, keep nine
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Weights were tuned by hand after running a few test prompts until the order felt natural.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Suggested starter phrases
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+responsive login form with remember me
+search bar with filters
+contact form with validation
+data table with sorting
+notification toast with actions
+```
 
-## Learn More
+Each phrase maps to a hard coded pattern snippet that plays with a typewriter effect.
 
-To learn more about Next.js, take a look at the following resources:
+## Shortcuts and assumptions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Patterns are stored as five hard coded snippets rather than built with live layout logic
+- Favorites live only in localStorage
+- Accessibility proof is an axe DevTools pass and a manual keyboard plus focus review
+- Mock API ships with the app instead of a real backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## What I would add with a full sprint
 
-## Deploy on Vercel
+- Real natural language service that composes any prompt into a layout
+- Live preview iframe so users see the snippet render instantly
+- VS Code side panel that pastes the snippet at the cursor
+- Supabase to sync favorites across devices
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How AI helped
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ChatGPT (this chat only) brainstormed the component catalog fields, suggested synonym lists, outlined the timeline, and surfaced VGAR test tips
+- Copilot and other models were not used
+- All final code, tuning, and design decisions are mine
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+## Live demo
+
+[https://gen‑visa.vercel.app](https://gen‑visa.vercel.app)

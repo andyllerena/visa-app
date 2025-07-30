@@ -12,7 +12,6 @@ const SUGGESTED_SEARCHES = [
   "search bar with filters",
   "navigation with dropdown",
   "modal with confirmation",
-  "search bar with filters ",
   "contact form with validation",
   "data table with sorting",
   "notification toast with actions",

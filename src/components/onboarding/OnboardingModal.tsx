@@ -123,8 +123,8 @@ export const OnboardingModal = () => {
             {/* Content */}
             <div className="flex-1 flex flex-col">
               {/* GIF Section */}
-              <div className="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 p-10 flex items-center justify-center">
-                <div className="w-full max-w-5xl mx-auto">
+              <div className="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 p-8 flex items-center justify-center">
+                <div className="w-full max-w-4xl mx-auto">
                   <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <img
                       src={currentPageData.gif}
@@ -137,9 +137,9 @@ export const OnboardingModal = () => {
               </div>
 
               {/* Text Section */}
-              <div className="bg-white px-10 py-3">
+              <div className="bg-white px-10 py-2">
                 <div className="max-w-4xl mx-auto text-center">
-                  <h2 className="text-3xl font-semibold text-gray-900 mb-2">
+                  <h2 className="text-3xl font-semibold text-gray-900 mb-1">
                     {currentPageData.title}
                   </h2>
                   <p className="text-base text-gray-600 mb-6 leading-relaxed">
