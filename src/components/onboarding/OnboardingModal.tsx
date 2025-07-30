@@ -159,7 +159,9 @@ export const OnboardingModal = () => {
                     onChange={(e) => setDontShowAgain(e.target.checked)}
                     className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                   />
-                  <span className="text-gray-600">Don't show this again</span>
+                  <span className="text-gray-600">
+                    Don&apos;t show this again
+                  </span>
                 </label>
 
                 <div className="flex gap-3">

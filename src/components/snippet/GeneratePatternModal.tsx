@@ -18,7 +18,7 @@ export const GeneratePatternModal = ({
 
   const normalizedQuery = searchQuery.toLowerCase().trim();
 
-  let pattern = patternTemplates[normalizedQuery];
+  const pattern = patternTemplates[normalizedQuery];
 
   const defaultPattern: PatternTemplate = {
     title: "Unknown Pattern",
