@@ -1,4 +1,3 @@
-// src/components/search/PromptBox.tsx
 "use client";
 
 import { useState, FormEvent, useEffect, useRef } from "react";
@@ -10,12 +9,13 @@ interface PromptBoxProps {
 
 const SUGGESTED_SEARCHES = [
   "responsive login form with remember me",
-  "data table with sorting and pagination",
   "search bar with filters",
-  "card grid layout",
-  "form with validation",
   "navigation with dropdown",
   "modal with confirmation",
+  "search bar with filters ",
+  "contact form with validation",
+  "data table with sorting",
+  "notification toast with actions",
 ];
 
 export const PromptBox = ({ onSearch, isLoading = false }: PromptBoxProps) => {
@@ -199,7 +199,7 @@ export const PromptBox = ({ onSearch, isLoading = false }: PromptBoxProps) => {
                   <span>Recent Searches</span>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); // keep dropdown open if needed
+                      e.stopPropagation();
                       clearRecentSearches();
                     }}
                     className="text-[11px] text-blue-600 hover:underline focus:outline-none cursor-pointer"
