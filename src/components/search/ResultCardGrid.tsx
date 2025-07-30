@@ -7,7 +7,7 @@ interface ResultCardGridProps {
 }
 
 export const ResultCardGrid = ({ result, onClick }: ResultCardGridProps) => {
-  const { item, score, matchedTerms } = result;
+  const { item, matchedTerms } = result;
   const [isFav, setIsFav] = useState(false);
 
   const STORAGE_KEY = "favoriteComponents";

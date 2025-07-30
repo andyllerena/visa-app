@@ -1,4 +1,3 @@
-// src/app/api/components/route.ts
 import { NextResponse } from "next/server";
 import catalog from "@/data/catalog.json";
 

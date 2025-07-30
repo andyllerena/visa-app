@@ -18,3 +18,26 @@ export interface Pattern {
   a11yNotes: string[];
   snippetTemplate: string;
 }
+
+export interface SearchResult {
+  component: Component;
+  score: number;
+  reasons: string[];
+}
+
+export interface PatternTemplate {
+  title: string;
+  description: string;
+  components: string[];
+  code: string;
+}
+
+export interface SuggestedSearch {
+  query: string;
+  description?: string;
+  estimatedComponents?: number;
+}
+
+export interface FavoriteComponent extends Component {
+  dateAdded: string;
+}

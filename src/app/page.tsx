@@ -1,4 +1,3 @@
-// src/app/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -10,6 +9,7 @@ import { Component, Pattern } from "@/types";
 import { Modal } from "@/components/common/Modal";
 import { SnippetPanelModal } from "@/components/snippet/SnippetPanelModal";
 import { ResultCardGrid } from "@/components/search/ResultCardGrid";
+import { GeneratePatternModal } from "@/components/snippet/GeneratePatternModal";
 
 export default function HomePage() {
   const [isSearching, setIsSearching] = useState(false);
@@ -18,19 +18,18 @@ export default function HomePage() {
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showGenerateModal, setShowGenerateModal] = useState(false);
+  const [currentSearchQuery, setCurrentSearchQuery] = useState("");
 
   const handleSearch = async (query: string) => {
     setIsSearching(true);
     setSelectedResult(null);
+    setCurrentSearchQuery(query);
 
     try {
-      const [componentsRes, patternsRes] = await Promise.all([
-        fetch("/api/components"),
-        fetch("/api/patterns"),
-      ]);
+      const [componentsRes] = await Promise.all([fetch("/api")]);
 
       const components: Component[] = await componentsRes.json();
-      const patterns: Pattern[] = await patternsRes.json();
 
       // Score and rank results
       const scoredResults = scoreResults(query, components);
@@ -85,7 +84,7 @@ export default function HomePage() {
                   Top {results.length} Matches
                 </h2>
                 <button
-                  onClick={() => console.log("Generate pattern")} // Wire up later
+                  onClick={() => setShowGenerateModal(true)}
                   className="px-4 py-2 bg-[#1434CB] text-white rounded-lg hover:bg-[#021E4C] transition-colors flex items-center gap-2"
                 >
                   <svg
@@ -124,6 +123,16 @@ export default function HomePage() {
         {selectedResult && (
           <SnippetPanelModal result={selectedResult} onClose={closeModal} />
         )}
+      </Modal>
+
+      <Modal
+        isOpen={showGenerateModal}
+        onClose={() => setShowGenerateModal(false)}
+      >
+        <GeneratePatternModal
+          searchQuery={currentSearchQuery}
+          onClose={() => setShowGenerateModal(false)}
+        />
       </Modal>
     </>
   );
