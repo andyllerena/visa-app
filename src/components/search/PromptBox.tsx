@@ -99,6 +99,13 @@ export const PromptBox = ({ onSearch, isLoading = false }: PromptBoxProps) => {
     }
   };
 
+  const clearRecentSearches = () => {
+    localStorage.removeItem("recentSearches");
+    setRecentSearches([]);
+    setSelectedIndex(-1);
+    setShowSuggestions(false);
+  };
+
   const filteredSuggestions = SUGGESTED_SEARCHES.filter(
     (s) => query.length > 0 && s.toLowerCase().includes(query.toLowerCase())
   );
@@ -188,8 +195,18 @@ export const PromptBox = ({ onSearch, isLoading = false }: PromptBoxProps) => {
             {/* Recent Searches */}
             {recentSearches.length > 0 && query.length === 0 && (
               <div className="p-2">
-                <p className="text-xs font-semibold text-gray-500 px-3 py-1">
-                  Recent Searches
+                <p className="text-xs font-semibold text-gray-500 px-3 py-1 flex  justify-between">
+                  <span>Recent Searches</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // keep dropdown open if needed
+                      clearRecentSearches();
+                    }}
+                    className="text-[11px] text-blue-600 hover:underline focus:outline-none cursor-pointer"
+                    type="button"
+                  >
+                    Clear
+                  </button>
                 </p>
                 {recentSearches.map((search, index) => (
                   <button

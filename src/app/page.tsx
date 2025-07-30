@@ -59,11 +59,15 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-8">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900">
-              VPDS Component Suggester
+            <h1 className="text-4xl font-bold mb-4">
+              <span className="text-[#1434CB]">Design </span>
+              <span className="text-[#FDB913]">Smarter </span>
+              <span className="text-[#1A1F71]">with </span>
+              <span className="text-[#1434CB]">VPDS</span>
             </h1>
             <p className="text-xl text-gray-600">
-              Describe what you want to build, get Nova components instantly
+              Gen-VISA: Prompt-Driven UI Generation with Visa’s Product Design
+              System
             </p>
           </div>
 

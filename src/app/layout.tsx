@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "VPDS Component Suggester",
+  title: "Gen-VISA",
   description:
     "AI-powered component suggestions for Visa Product Design System",
 };
@@ -17,21 +17,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav className="bg-white border-b border-gray-200 py-4 px-6">
+        <nav
+          className="bg-gradient-to-r
+             from-[#1434CB]      
+             via-[#1A2BB0]    
+             to-[#1A1F71]        
+             border-b border-transparent
+             py-4 px-6"
+        >
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             {/* Left side: site title */}
-            <Link href="/" className="text-2xl font-bold text-[#1434CB]">
-              VPDS Component Suggester
+            <Link href="/" className="text-2xl font-bold text-white">
+              Gen-VISA
             </Link>
 
             {/* Right side: nav links */}
-            <div className="flex gap-6 items-center text-sm font-medium text-gray-700">
-              <Link href="/" className="hover:text-[#1434CB] transition-colors">
+            <div className="flex gap-6 items-center text-sm font-medium text-white">
+              <Link href="/" className="hover:text-[#FDB913] transition-colors">
                 Search
               </Link>
               <Link
-                href="/recents"
-                className="hover:text-[#1434CB] transition-colors"
+                href="/favorites"
+                className="hover:text-[#FDB913] transition-colors"
               >
                 Favorites
               </Link>
@@ -39,7 +46,7 @@ export default function RootLayout({
                 href="https://design.visa.com/components/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#1434CB] transition-colors"
+                className="hover:text-[#FDB913] transition-colors"
               >
                 Design Docs
               </a>
