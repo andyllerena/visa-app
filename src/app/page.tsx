@@ -31,7 +31,6 @@ export default function HomePage() {
 
       const components: Component[] = await componentsRes.json();
 
-      // Score and rank results
       const scoredResults = scoreResults(query, components);
       setResults(scoredResults);
     } catch (error) {

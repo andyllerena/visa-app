@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Heart, Search, Filter, Grid, List, Star } from "lucide-react";
+import { Heart, Search, Grid, List, Star } from "lucide-react";
 import { ResultCardGrid } from "../../components/search/ResultCardGrid";
 import { ScoredResult } from "@/lib/scorer";
 import { Component } from "@/types";
@@ -10,7 +10,6 @@ const FavoritesUI: React.FC = () => {
   const [catalog, setCatalog] = useState<Component[]>([]);
   const [favorites, setFavorites] = useState<ScoredResult[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -75,13 +74,11 @@ const FavoritesUI: React.FC = () => {
     };
   }, [catalog]);
 
-  const categories = ["All"];
-
   const filteredFavorites = favorites.filter((result) => {
     const { item } = result;
     const searchLower = searchTerm.toLowerCase();
 
-    const matchesSearch =
+    return (
       !searchTerm ||
       item.name.toLowerCase().includes(searchLower) ||
       (item.description &&
@@ -92,11 +89,8 @@ const FavoritesUI: React.FC = () => {
       (item.synonyms &&
         item.synonyms.some((synonym: string) =>
           synonym.toLowerCase().includes(searchLower)
-        ));
-
-    const matchesCategory = selectedCategory === "All";
-
-    return matchesSearch && matchesCategory;
+        ))
+    );
   });
 
   const handleComponentClick = (result: ScoredResult) => {
@@ -148,44 +142,29 @@ const FavoritesUI: React.FC = () => {
               />
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Filter className="w-4 h-4 text-gray-500" />
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex items-center bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`p-2 rounded-md transition-all ${
-                    viewMode === "grid"
-                      ? "bg-white shadow-sm text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  <Grid className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setViewMode("list")}
-                  className={`p-2 rounded-md transition-all ${
-                    viewMode === "list"
-                      ? "bg-white shadow-sm text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  <List className="w-4 h-4" />
-                </button>
-              </div>
+            <div className="flex items-center bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode("grid")}
+                aria-label="Switch to grid view"
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "grid"
+                    ? "bg-white shadow-sm text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                <Grid className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                aria-label="Switch to list view"
+                className={`p-2 rounded-md transition-all ${
+                  viewMode === "list"
+                    ? "bg-white shadow-sm text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                <List className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -196,13 +175,11 @@ const FavoritesUI: React.FC = () => {
               <Heart className="w-8 h-8 text-red-500" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              {searchTerm || selectedCategory !== "All"
-                ? "No matches found"
-                : "No favorites yet"}
+              {searchTerm ? "No matches found" : "No favorites yet"}
             </h3>
             <p className="text-gray-600 max-w-md mx-auto">
-              {searchTerm || selectedCategory !== "All"
-                ? "Try adjusting your search or filter criteria"
+              {searchTerm
+                ? "Try adjusting your search term"
                 : "Start adding components to your favorites to see them here"}
             </p>
           </div>

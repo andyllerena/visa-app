@@ -1,5 +1,3 @@
-// src/data/componentSnippets.ts
-
 export interface ComponentSnippet {
   imports: string[];
   code: string;

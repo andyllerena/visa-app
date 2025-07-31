@@ -24,9 +24,9 @@
       "codeExample": "accordion-default",
       "a11yNotes": [
         "Use proper heading hierarchy",
-        "Announce expanded/collapsed state",
-        "Keyboard navigable with arrow keys",
-        "Focus visible on active section"
+        "Announce expanded/collapsed state with aria-expanded or native <details>",
+        "Keyboard navigable via Tab and Enter/Space",
+        "Focus visible on active summary/header"
       ]
     },
     {
@@ -84,8 +84,8 @@
       "a11yNotes": [
         "Use nav element with aria-label",
         "Current page should have aria-current='page'",
-        "Separate items with aria-hidden separators",
-        "Maintain logical tab order"
+        "Use aria-hidden='true' on visual separators between breadcrumb items",
+        "Ensure breadcrumb links are keyboard accessible via Tab and Shift+Tab"
       ]
     },
     {
@@ -112,10 +112,10 @@
       "category": "form",
       "codeExample": "button-default",
       "a11yNotes": [
-        "Use descriptive text labels",
-        "Focus visible state required",
-        "Disabled state must be announced",
-        "Icon-only buttons need aria-label"
+        "Use clear, descriptive text inside buttons to convey purpose",
+        "Ensure visible focus indicators on keyboard navigation",
+        "Use the native disabled attribute so screen readers announce the state",
+        "Icon-only buttons need aria-label for screen reader accessibility"
       ]
     },
     {
@@ -136,10 +136,10 @@
       "category": "form",
       "codeExample": "checkbox-default",
       "a11yNotes": [
-        "Label must be clickable",
-        "Group related checkboxes with fieldset",
-        "Announce checked/unchecked state",
-        "Space/Enter to toggle"
+        "Associate each checkbox input with a label using for and id",
+        "Group related checkboxes using fieldset and legend (legend may be visually hidden)",
+        "Use native checkbox inputs so screen readers announce state changes",
+        "Press Space to toggle checkbox selection"
       ]
     },
     {
@@ -168,10 +168,10 @@
       "category": "form",
       "codeExample": "selection-chip-default",
       "a11yNotes": [
-        "Use role='checkbox' for selection",
-        "Announce selected state",
-        "Keyboard navigable with arrow keys",
-        "Delete key removes if dismissible"
+        "Use nav element with aria-label",
+        "Current page should have aria-current='page'",
+        "Use aria-hidden='true' on visual separators between breadcrumb items",
+        "Ensure breadcrumb links are keyboard accessible via Tab and Shift+Tab"
       ]
     },
     {
@@ -201,10 +201,10 @@
       "category": "form",
       "codeExample": "combobox-default",
       "a11yNotes": [
-        "Announce number of results",
-        "Arrow keys navigate options",
-        "Escape closes dropdown",
-        "Selected option fills input"
+        "Use aria-live or status role to announce number of available results",
+        "Up/Down arrow keys open the menu and move focus between options",
+        "Escape key closes the dropdown and clears inline autocomplete",
+        "Enter selects focused option and fills input field"
       ]
     },
     {
@@ -225,10 +225,11 @@
       "category": "display",
       "codeExample": "content-card-default",
       "a11yNotes": [
-        "Use article or section element",
-        "Heading hierarchy must be logical",
-        "Interactive cards need focus states",
-        "Alt text for card images"
+        "Wrap each card in an <article> or <section> element for semantic structure",
+        "Use semantic heading elements and maintain logical heading hierarchy",
+        "Ensure interactive cards have visible focus styles and are keyboard accessible",
+        "Provide meaningful alt text for card images",
+        "Avoid generic button or link labels; use aria-labels for context when repeated"
       ]
     },
     {
@@ -257,10 +258,10 @@
       "category": "form",
       "codeExample": "date-selector-default",
       "a11yNotes": [
-        "Keyboard navigation for calendar",
-        "Announce selected date",
-        "Format instructions in label",
-        "Manual input option required"
+        "Support full keyboard navigation within the calendar grid (arrows, Home/End, Page Up/Down)",
+        "Announce selected date via live region or update input field with selected value",
+        "Include date format instructions in the label or via aria-describedby",
+        "Allow manual date entry for screen reader and keyboard users"
       ]
     },
     {
@@ -290,10 +291,10 @@
       "category": "overlay",
       "codeExample": "dialog-default",
       "a11yNotes": [
-        "Focus trapped within dialog",
-        "Escape key closes dialog",
-        "Focus returns to trigger on close",
-        "Background content aria-hidden"
+        "Trap keyboard focus within the dialog while open",
+        "Pressing Escape closes the dialog",
+        "Return focus to the triggering element when dialog closes",
+        "Ensure background content is hidden from screen readers while dialog is open (e.g., aria-hidden)"
       ]
     },
     {
@@ -322,10 +323,10 @@
       "category": "navigation",
       "codeExample": "dropdown-menu-default",
       "a11yNotes": [
-        "Arrow keys navigate menu items",
-        "Escape closes menu",
-        "First item auto-focused on open",
-        "Role='menu' with menuitems"
+        "Tab and Shift+Tab move through menu items",
+        "Escape key closes the menu",
+        "Move focus to the first focusable item in the menu when it opens",
+        "Use native elements (buttons or links) inside the menu — do not assign extra ARIA roles"
       ]
     },
     {
@@ -352,10 +353,10 @@
       "category": "layout",
       "codeExample": "footer-default",
       "a11yNotes": [
-        "Use footer landmark role",
-        "Group links with nav elements",
-        "Ensure sufficient color contrast",
-        "Skip link to footer if long page"
+        "Use <footer> element or role='contentinfo' for landmark navigation",
+        "Wrap related footer links in <nav> elements with descriptive aria-labels",
+        "Ensure text and logos meet WCAG contrast ratios and support high contrast mode",
+        "Consider adding a skip link to footer on long, scroll-heavy pages"
       ]
     },
     {
@@ -384,10 +385,10 @@
       "category": "navigation",
       "codeExample": "horizontal-nav-default",
       "a11yNotes": [
-        "Use nav landmark",
-        "Current page marked with aria-current",
-        "Skip navigation link first item",
-        "Responsive menu keyboard accessible"
+        "Use <nav> landmarks with descriptive aria-labels if multiple navs exist",
+        "Add aria-current='page' to the link for the current page",
+        "Include a 'Skip to main content' link as the first focusable element for keyboard users",
+        "Ensure responsive (mobile) menu is fully operable via keyboard and trap focus when open"
       ]
     },
     {
@@ -416,10 +417,10 @@
       "category": "form",
       "codeExample": "input-default",
       "a11yNotes": [
-        "Label required and associated",
-        "Error messages linked with aria-describedby",
-        "Required fields marked with aria-required",
-        "Input type matches expected data"
+        "Each input must have a label associated using for/id",
+        "Use aria-describedby to associate instructions and error messages",
+        "Indicate required fields in label text and optionally with the native required attribute",
+        "Use appropriate input types (e.g., email, date) to match expected data and aid validation"
       ]
     },
     {
@@ -448,10 +449,10 @@
       "category": "form",
       "codeExample": "listbox-single-select-default",
       "a11yNotes": [
-        "Arrow keys navigate options",
-        "Selected option has aria-selected",
-        "Type to search/filter options",
-        "Enter or Space selects option"
+        "Use Up/Down arrow keys to navigate between options in the listbox",
+        "Use aria-selected='true' on the selected option",
+        "Optional: support type-to-search within listbox if implemented",
+        "Press Enter or Space to select (or toggle) focused option"
       ]
     },
     {
@@ -478,10 +479,10 @@
       "category": "navigation",
       "codeExample": "pagination-default",
       "a11yNotes": [
-        "Current page announced",
-        "Total pages communicated",
-        "Disabled states for first/last",
-        "Keyboard navigation between pages"
+        "Use aria-current='page' to indicate the current page to screen readers",
+        "Use <ul> for pagination list so screen readers can announce number of items",
+        "Use native disabled attribute on non-actionable pagination controls",
+        "Use Tab to navigate between pagination controls and Enter to activate"
       ]
     },
     {
@@ -511,10 +512,10 @@
       "category": "layout",
       "codeExample": "modal-panel-default",
       "a11yNotes": [
-        "Focus management when open",
-        "Escape key closes panel",
-        "Announce panel opening",
-        "Background content interaction blocked"
+        "Trap keyboard focus inside the panel when open",
+        "Escape key must close the panel and return focus to trigger",
+        "Use aria-labelledby and aria-describedby to announce panel title and content",
+        "Use aria-modal='true' and prevent interaction with background content"
       ]
     },
     {
@@ -534,10 +535,10 @@
       "category": "form",
       "codeExample": "radio-default",
       "a11yNotes": [
-        "Group with fieldset and legend",
-        "Arrow keys navigate within group",
-        "Only one selectable per group",
-        "Label clickable to select"
+        "Wrap radio buttons in a <fieldset> with a <legend> to describe the group",
+        "Use arrow keys to move focus and selection within the group (wraps around)",
+        "Ensure only one radio can be selected per group using a shared name attribute",
+        "Associate each radio input with a clickable <label> using for and id"
       ]
     },
     {
@@ -566,10 +567,10 @@
       "category": "form",
       "codeExample": "select-default",
       "a11yNotes": [
-        "Label associated with select",
-        "First option descriptive if placeholder",
-        "Keyboard navigation with arrows",
-        "Announces selected option"
+        "Associate each <select> with a <label> using for and id attributes",
+        "Use a descriptive first option if it acts as a placeholder",
+        "Use ↑/↓ to navigate, and Home/End to jump to first/last option",
+        "Screen readers announce selected option automatically in native <select>"
       ]
     },
     {
@@ -596,10 +597,10 @@
       "category": "form",
       "codeExample": "default-switch",
       "a11yNotes": [
-        "Label describes what switch controls",
-        "Announce on/off state",
-        "Space or Enter toggles",
-        "Visual state clear without color"
+        "Provide a clear, descriptive label indicating what the switch controls",
+        "Use role='switch' so screen readers announce 'on' and 'off' states",
+        "Press Space to toggle the switch (per native checkbox behavior)",
+        "Ensure on/off state is visually distinguishable without relying on color alone"
       ]
     },
     {
@@ -628,13 +629,11 @@
       "category": "display",
       "codeExample": "large-padding-banded-table",
       "a11yNotes": [
-        "Use table headers with scope",
-        "Caption describes table content",
-        "Ensure responsive on mobile",
-        "Row/column headers for complex tables"
+        "Add scope='col' or scope='row' to <th> elements for accessible header-cell associations",
+        "Include a visually hidden <caption> that describes the table's purpose and structure",
+        "Ensure responsive design preserves table structure and keyboard/screen reader access on small screens",
+        "Use id and headers attributes to associate cells with row/column headers in complex tables"
       ]
     }
-  ],
-
-  "patterns": []
+  ]
 }

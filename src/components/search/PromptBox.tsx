@@ -67,7 +67,6 @@ export const PromptBox = ({ onSearch, isLoading = false }: PromptBoxProps) => {
     setQuery(suggestion);
     setShowSuggestions(false);
 
-    // Trigger search
     const newRecents = [
       suggestion,
       ...recentSearches.filter((r) => r !== suggestion),

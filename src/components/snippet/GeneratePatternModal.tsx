@@ -33,17 +33,17 @@ export const GeneratePatternModal = ({
   const selectedPattern = pattern || defaultPattern;
 
   const fullText = `
-Generating component pattern for: "${searchQuery}"
+  Generating component pattern for: "${searchQuery}"
 
-✅ Analyzing requirements...
-✅ Selecting optimal components: ${selectedPattern.components.join(", ")}
-✅ Applying VPDS styling...
+  ✅ Analyzing requirements...
+  ✅ Selecting optimal components: ${selectedPattern.components.join(", ")}
+  ✅ Applying VPDS styling...
 
-Pattern: ${selectedPattern.title}
-Description: ${selectedPattern.description}
+  Pattern: ${selectedPattern.title}
+  Description: ${selectedPattern.description}
 
-${selectedPattern.code}
-`;
+  ${selectedPattern.code}
+  `;
 
   useEffect(() => {
     if (index < fullText.length) {

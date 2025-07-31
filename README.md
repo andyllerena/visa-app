@@ -1,28 +1,56 @@
-# Gen VISA : prompt driven UI generator that speaks VPDS
+# Gen VISA
 
-Describe what you need, get the best Visa Product Design System components, copy a ready snippet.
+A prompt-driven UI generator that speaks Visa Product Design System (VPDS). Simply describe what you need and get the best VPDS components with ready-to-use code snippets.
 
-## Approach and tech choices
+## 🚀 Quick Start
 
-- Next.js App Router and React 18 for rapid routing and Vercel zero config deploy
-- Tailwind CSS for layout and focus rings, separate from the VPDS look
-- Local JSON catalog of more than twenty Nova components, each with tags, synonyms, accessibility notes, and a snippet id
-- TypeScript rule based scorer that adds points for exact name, tag, or synonym and returns the top nine matches
-- json‑server mock API with a half‑second delay plus skeleton loaders so the app feels like it is calling a backend
-- Real snippets import `@visa/nova‑react` primitives so output is always on brand
-
-## Scoring in one glance
-
-```
-exact name   +20
-tag match     +5 per tag
-synonym       +3 per synonym
-sort high to low, keep nine
+```bash
+npm install
+npm run dev
 ```
 
-Weights were tuned by hand after running a few test prompts until the order felt natural.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Suggested starter phrases
+**Live Demo:** [https://gen-visa.vercel.app](https://gen-visa.vercel.app)
+
+## ✨ Features
+
+- **Smart Component Matching**: Scoring algorithm finds the most relevant VPDS components based on your description
+- **Ready-to-Use Snippets**: All code snippets use `@visa/nova-react` primitives for consistent branding
+- **Accessibility First**: Components include accessibility notes and have been tested with axe DevTools
+- **Pattern Suggestions**: Pre-built patterns with typewriter animations for common use cases
+- **Favorites System**: Save your most-used components (stored locally)
+
+## 🛠 Tech Stack
+
+- **Next.js App Router** with React 18 for optimized routing and zero-config Vercel deployment
+- **Tailwind CSS** for layout and focus management (separate from VPDS styling)
+- **TypeScript** for type safety and intelligent component scoring
+- **json-server** mock API with realistic loading delays and skeleton states
+
+## 🎯 How It Works
+
+### Component Scoring Algorithm
+
+The app uses a rule-based scoring system to find the most relevant components:
+
+```
+Exact name match:    +20 points
+Tag match:           +5 points per tag
+Synonym match:       +3 points per synonym
+
+Results are sorted high to low, showing top 9 matches
+```
+
+_Scoring weights were hand-tuned through testing to ensure natural result ordering._
+
+### Component Catalog
+
+- **20+ Nova components** with comprehensive metadata
+- Each component includes description, tags, synonyms, accessibility notes, and snippet IDs
+- Stored as local JSON for fast searching and filtering
+
+## 💡 Try These Starter Phrases
 
 ```
 responsive login form with remember me
@@ -32,37 +60,53 @@ data table with sorting
 notification toast with actions
 ```
 
-Each phrase maps to a hard coded pattern snippet that plays with a typewriter effect.
+Each phrase triggers a pre-built pattern snippet with smooth typewriter animation.
 
-## Shortcuts and assumptions
+## ♿ Accessibility
 
-- Patterns are stored as five hard coded snippets rather than built with live layout logic
-- Favorites live only in localStorage
-- Accessibility proof is an axe DevTools pass and a manual keyboard plus focus review
-- Mock API ships with the app instead of a real backend
+- All components pass axe DevTools accessibility audits
+- Manual keyboard navigation and focus management testing completed
+- Accessibility notes included for each component
+- Proper labels and contrast ratios implemented
 
-## What I would add with a full sprint
+## 🤖 AI Assistance
 
-- Real natural language service that composes any prompt into a layout
-- Live preview iframe so users see the snippet render instantly
-- VS Code side panel that pastes the snippet at the cursor
-- Supabase to sync favorites across devices
+ChatGPT was used to assist with:
 
-## How AI helped
+- Bug fixes and debugging
+- Generating component catalog data and code snippets
+- Refining accessibility notes and best practices
+- Brainstorming component metadata structure
 
-- ChatGPT (this chat only) brainstormed the component catalog fields, suggested synonym lists, outlined the timeline, and surfaced VGAR test tips
-- Copilot and other models were not used
-- All final code, tuning, and design decisions are mine
+## 🏗 Current Limitations
 
-## Run locally
+- **Hardcoded Patterns**: Generated snippets are pre-built rather than dynamically composed
+- **Local Storage Only**: Favorites aren't synced across devices
+- **Mock API**: Ships with static data instead of real backend
+- **Limited Catalog**: Includes only the most essential components
+- **Simple Scoring**: Basic keyword matching without natural language processing
 
-```bash
-npm install
-npm run dev
-```
+## 🔮 Future Enhancements
 
-Open [http://localhost:3000](http://localhost:3000)
+With additional development time, the following features would be prioritized:
 
-## Live demo
+### Core Features
 
-[https://gen‑visa.vercel.app](https://gen‑visa.vercel.app)
+- **Natural Language Processing**: AI service to compose any prompt into proper layouts
+- **Live Preview**: Iframe rendering of snippets for instant visual feedback
+- **VS Code Integration**: Side panel extension for direct code insertion
+- **Real Database**: Backend service to house all components and user data
+
+### User Experience
+
+- **Authentication System**: User accounts and profile management
+- **Cloud Sync**: Favorites and preferences across devices
+- **Pattern Library**: Save and share custom generated patterns
+- **VPDS Integration**: Rebuild the app itself using VPDS components
+
+### Technical Improvements
+
+- **Advanced AI Model**: Custom NLP for generating user-inputted patterns
+- **Component Builder**: Visual editor for creating new component patterns
+- **Analytics**: Usage tracking to improve component recommendations
+- **API Integration**: Real-time component updates from VPDS releases

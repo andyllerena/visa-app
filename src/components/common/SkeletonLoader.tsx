@@ -1,4 +1,3 @@
-// src/components/common/SkeletonLoader.tsx
 export const SkeletonLoader = () => {
   return (
     <div className="grid grid-cols-3 gap-6">
