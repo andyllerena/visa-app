@@ -78,17 +78,18 @@ ChatGPT was used to assist with:
 - Refining accessibility notes and best practices
 - Brainstorming component metadata structure
 
-⚡ Development Shortcuts
+## ⚡ Development Shortcuts
+
 To deliver this project efficiently, several pragmatic shortcuts were taken:
 
-Hardcoded Pattern Generation: Instead of building complex layout logic, the five starter phrases map to pre-built snippet patterns with typewriter effects
-localStorage for Favorites: User preferences are stored locally rather than implementing a full user system with cloud sync
-Mock API Integration: Uses json-server with artificial delays to simulate real backend calls instead of building actual API infrastructure
-Simplified Component Scoring: Implements basic keyword matching rather than advanced natural language processing
-Curated Component Set: Includes only the most essential and commonly-used components rather than the complete VPDS library
-Static Data Architecture: Component catalog ships with the app rather than being dynamically loaded from a content management system
+- **Hardcoded Pattern Generation**: Instead of building complex layout logic, the five starter phrases map to pre-built snippet patterns with typewriter effects
+- **localStorage for Favorites**: User preferences are stored locally rather than implementing a full user system with cloud sync
+- **Mock API Integration**: Uses json-server with artificial delays to simulate real backend calls instead of building actual API infrastructure
+- **Simplified Component Scoring**: Implements basic keyword matching rather than advanced natural language processing
+- **Curated Component Set**: Includes only the most essential and commonly-used components rather than the complete VPDS library
+- **Static Data Architecture**: Component catalog ships with the app rather than being dynamically loaded from a content management system
 
-These shortcuts enabled rapid development while maintaining core functionality and user experience quality
+These shortcuts enabled rapid development while maintaining core functionality and user experience quality.
 
 ## 🏗 Current Limitations
 
